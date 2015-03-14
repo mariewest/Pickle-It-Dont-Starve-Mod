@@ -6,13 +6,8 @@ local Pickler = Class(function(self, inst)
     self.targettime = nil
     self.task = nil
 
-	-- Pickling should take 3 days to complete
+	-- Pickling should take 2 days to complete
     self.pickle_time = TUNING.TOTAL_DAY_TIME * 2
-    
-    -- self.product = nil
-    -- self.product_spoilage = nil
-    -- self.recipes = nil
-    -- self.default_recipe = nil
 end)
 
 function Pickler:CanPickle()
@@ -20,7 +15,7 @@ function Pickler:CanPickle()
 	for k,v in pairs (self.inst.components.container.slots) do
 		num = num + 1 
 	end
-	return num >= 1
+	return num >= 1 and not self.inst.components.pickler:Pickling()
 end
 
 -- Pickle all the items
@@ -30,7 +25,17 @@ local function pickleallitems(inst)
 		local result = nil
 		
 		if pickleit_Recipes[v.prefab] ~= nil then
-			result = SpawnPrefab(pickleit_Recipes[v.prefab])
+			if v.prefab == "cucumber" then
+				local rnd = math.random() * 100	
+				-- 2% chance of spawning a golden pickle
+				if rnd <= 2 then
+					result = SpawnPrefab("cucumber_golden_pickled")
+				else
+					result = SpawnPrefab(pickleit_Recipes[v.prefab])
+				end
+			else
+				result = SpawnPrefab(pickleit_Recipes[v.prefab])
+			end
 		else
 			result = SpawnPrefab("mush_pickled")
 		end
@@ -63,9 +68,16 @@ function Pickler:StartPickling( time )
 	self:StopPickling()
 		
 	if self.inst.components.container then
-		self.inst.components.container:Close()
+		if self.inst.components.container:IsOpen() then
+			self.inst.components.container:Close()
+		end
 		self.inst.components.container.canbeopened = false
 	end
+	
+	-- determine pickling completion time
+	local pickle_time = time or self.pickle_time
+	self.targettime = GetTime() + pickle_time
+	self.task = self.inst:DoTaskInTime(pickle_time, dopickling, "pickle")
 		
 	-- if this function is called with time set, then its assumed that we are continuing pickling
 	if not time and self.onstartpickling then
@@ -73,10 +85,6 @@ function Pickler:StartPickling( time )
 	elseif time and self.oncontinuepickling then
 		self.oncontinuepickling(self.inst)
 	end
-	
-	local pickle_time = time or self.pickle_time
-	self.targettime = GetTime() + pickle_time
-	self.task = self.inst:DoTaskInTime(pickle_time, dopickling, "pickle")
 end
 
 function Pickler:StopPickling()
@@ -100,7 +108,9 @@ function Pickler:TimeLeft()
 end
 
 function Pickler:LongUpdate( dt )
-	self:StartPickling( self:TimeLeft() - dt )
+	if(self:Pickling()) then
+		self:StartPickling( self:TimeLeft() - dt )
+	end
 end
 
 function Pickler:OnSave()
@@ -121,7 +131,7 @@ function Pickler:OnLoad(data)
     end
 end
 
--- Determine which pickled loot to drop
+-- Determine which pickled loot to drop when the pickle barrel is destroyed
 function Pickler:CalculateLoot()
 	local loot = {}
 	
@@ -155,6 +165,19 @@ function Pickler:CalculateLoot()
 	end
 	
 	self.inst.components.lootdropper:SetLoot(loot)
+end
+
+-- Slow the perish rate of food in the pickle barrel when it starts pickling
+function Pickler:SlowPerishing()
+	if self:Pickling() then
+		for k,v in pairs (self.inst.components.container.slots) do	
+			-- Stop the item from perishing as long as it isn't already spoiled
+			if v.components.perishable and not v.components.perishable:IsSpoiled() then
+				-- Make the items 100% fresh (because StopPerishing() wasn't working...?)
+				v.components.perishable:SetPercent(1)
+			end	
+		end
+	end
 end
 
 function Pickler:GetDebugString()
