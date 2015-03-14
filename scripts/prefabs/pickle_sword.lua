@@ -40,7 +40,7 @@ local function fn()
     inst.components.weapon:SetDamage(TUNING.SPEAR_DAMAGE * 1.25)
 	
 	inst:AddComponent("edible")
-    inst.components.edible.foodtype = FOODTYPE.VEGGIE
+    inst.components.edible.foodtype = "VEGGIE"
     inst.components.edible.healthvalue = TUNING.HEALING_TINY
     inst.components.edible.hungervalue = TUNING.CALORIES_SMALL
     inst.components.edible.sanityvalue = TUNING.SANITY_SMALL
@@ -62,9 +62,7 @@ local function fn()
     inst:AddComponent("inventoryitem")
     inst.components.inventoryitem.imagename = "pickle_sword"
     inst.components.inventoryitem.atlasname = "images/inventoryimages/pickle_sword.xml"
-	
-	MakeHauntableLaunchAndPerish(inst)
-     
+	     
     inst:AddComponent("equippable")
     inst.components.equippable:SetOnEquip( OnEquip )
     inst.components.equippable:SetOnUnequip( OnUnequip )

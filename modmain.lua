@@ -41,16 +41,17 @@ pickleit_dopickle = function(act)
 
 	return false
 end 
-AddAction('PICKLEIT', GLOBAL.STRINGS.NAMES.PICKLE, pickleit_dopickle)
-AddStategraphActionHandler('wilson_client', GLOBAL.ActionHandler(GLOBAL.ACTIONS.PICKLEIT, "dolongaction"))
-AddStategraphActionHandler('wilson', GLOBAL.ActionHandler(GLOBAL.ACTIONS.PICKLEIT, "dolongaction"))
+
+--AddAction('PICKLEIT', GLOBAL.STRINGS.NAMES.PICKLE, pickleit_dopickle)
+--AddStategraphActionHandler('wilson_client', GLOBAL.ActionHandler(GLOBAL.ACTIONS.PICKLEIT, "dolongaction"))
+--AddStategraphActionHandler('wilson', GLOBAL.ActionHandler(GLOBAL.ACTIONS.PICKLEIT, "dolongaction"))
 
 local function picklit_pickle_button(inst, doer, actions, right)
 	if right then
 		table.insert(actions, GLOBAL.ACTIONS.PICKLEIT)
 	end
 end
-AddComponentAction('SCENE', 'pickler', picklit_pickle_button)
+--AddComponentAction('SCENE', 'pickler', picklit_pickle_button)
 
 local function AddPigLootInternal(prefab)
 	prefab.components.lootdropper:AddChanceLoot('pigs_foot',1)

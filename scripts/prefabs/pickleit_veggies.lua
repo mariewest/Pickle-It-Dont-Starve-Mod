@@ -92,7 +92,7 @@ local function MakeVeggie(name, has_seeds)
 		inst:AddComponent("edible")
 		inst.components.edible.healthvalue 	= TUNING.HEALING_TINY/2
 		inst.components.edible.hungervalue 	= TUNING.CALORIES_TINY
-		inst.components.edible.foodtype 	= FOODTYPE.SEEDS
+		inst.components.edible.foodtype 	= "SEEDS"
 
         inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -117,8 +117,6 @@ local function MakeVeggie(name, has_seeds)
 		inst.components.plantable.growtime = TUNING.SEEDS_GROW_TIME
 		inst.components.plantable.product = name
 
-		MakeHauntableLaunchAndPerish(inst)
-
 		return inst
 	end
 
@@ -138,7 +136,7 @@ local function MakeVeggie(name, has_seeds)
 		inst.components.edible.healthvalue 	= PICKLEITVEGGIES[name].health
 		inst.components.edible.hungervalue 	= PICKLEITVEGGIES[name].hunger
 		inst.components.edible.sanityvalue 	= PICKLEITVEGGIES[name].sanity or 0		
-		inst.components.edible.foodtype 	= FOODTYPE.VEGGIE
+		inst.components.edible.foodtype 	= "VEGGIE"
 
         inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -162,8 +160,6 @@ local function MakeVeggie(name, has_seeds)
 	    MakeSmallBurnable(inst)
 		MakeSmallPropagator(inst) 
 
-		MakeHauntableLaunchAndPerish(inst)
-
 		return inst
 	end
 	
@@ -183,7 +179,7 @@ local function MakeVeggie(name, has_seeds)
 		inst.components.edible.healthvalue = PICKLEITVEGGIES[name].cooked_health
 		inst.components.edible.hungervalue = PICKLEITVEGGIES[name].cooked_hunger
 		inst.components.edible.sanityvalue = PICKLEITVEGGIES[name].cooked_sanity or 0
-		inst.components.edible.foodtype = FOODTYPE.VEGGIE
+		inst.components.edible.foodtype = "VEGGIE"
 
         inst:AddComponent("stackable")
 		inst.components.stackable.maxsize = TUNING.STACK_SIZE_SMALLITEM
@@ -203,8 +199,6 @@ local function MakeVeggie(name, has_seeds)
 
 	    MakeSmallBurnable(inst)
 		MakeSmallPropagator(inst)
-
-		MakeHauntableLaunchAndPerish(inst)
 
 		return inst
 	end
