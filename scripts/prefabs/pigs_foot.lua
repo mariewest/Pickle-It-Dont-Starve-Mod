@@ -1,3 +1,5 @@
+require "cooking"
+
 local assets=
 {
     Asset("ANIM", "anim/pigs_foot.zip"),						-- Animation Zip
@@ -10,6 +12,7 @@ local function fn(Sim)
 	local inst = CreateEntity()
 	inst.entity:AddTransform()
 	inst.entity:AddAnimState()
+
 	MakeInventoryPhysics(inst)
 	
 	inst:AddTag("meat")
@@ -18,7 +21,7 @@ local function fn(Sim)
 	inst.AnimState:SetBuild("pigs_foot")
 	inst.AnimState:SetBank("pigs_foot")
 	inst.AnimState:PlayAnimation("idle")
-	
+
 	-- Make it edible
 	inst:AddComponent("edible")
 	inst.components.edible.healthvalue = 0						-- Amount to heal
@@ -69,15 +72,6 @@ local function fn(Sim)
 	
 	return inst
 end
-
-STRINGS.NAMES.PIGS_FOOT = "Pigs Foot"
-
--- Randomizes the inspection line upon inspection.
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGS_FOOT = {	
-	"Poor Wilbur...",
-	"This little piggy isn't going to the market anymore",
-}
-
 
 -- Make it so this can go in the cook_pot
 AddIngredientValues({"pigs_foot"}, {meat=.5}, true)

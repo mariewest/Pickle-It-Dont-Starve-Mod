@@ -9,13 +9,15 @@ local assets=
 -- Modeled after spoiled food
 local function fn(Sim)
 	local inst = CreateEntity()
-	local trans = inst.entity:AddTransform()
-	local anim = inst.entity:AddAnimState()
-    MakeInventoryPhysics(inst)
     
-    anim:SetBank("mush_pickled")
-    anim:SetBuild("mush_pickled")
-    anim:PlayAnimation("idle")
+    inst.entity:AddTransform()
+    inst.entity:AddAnimState()
+    
+    MakeInventoryPhysics(inst)
+
+    inst.AnimState:SetBank("mush_pickled")
+    inst.AnimState:SetBuild("mush_pickled")
+    inst.AnimState:PlayAnimation("idle")
     
     inst:AddComponent("fertilizer")
     inst.components.fertilizer.fertilizervalue = TUNING.SPOILEDFOOD_FERTILIZE * 2
@@ -43,14 +45,6 @@ local function fn(Sim)
 
 	return inst
 end
-
-STRINGS.NAMES.MUSH_PICKLED = "Pickled Mush"
-
--- Randomizes the inspection line upon inspection.
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.MUSH_PICKLED = {	
-	"Better not eat this", 
-	"Pickled into oblivion, I guess", 
-}
 
 -- Return our prefabbed mush_pickled
 return Prefab( "common/inventory/mush_pickled", fn, assets)

@@ -18,7 +18,7 @@ local function fn(Sim)
 	inst.AnimState:SetBuild("pigs_foot")
 	inst.AnimState:SetBank("pigs_foot")
 	inst.AnimState:PlayAnimation("cooked")
-	
+
 	-- Make it edible
 	inst:AddComponent("edible")
 	inst.components.edible.healthvalue = TUNING.HEALING_SMALL	-- Amount to heal
@@ -58,14 +58,6 @@ local function fn(Sim)
 		
 	return inst
 end
-
-STRINGS.NAMES.PIGS_FOOT_COOKED = "Pork Rinds"
-
--- Randomizes the inspection line upon inspection.
-STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGS_FOOT_COOKED = {	
-	"Best eaten while watching football",
-	"A crunchy snack made from meat!",
-}
 
 -- Return our prefab
 return Prefab( "common/inventory/pigs_foot_cooked", fn, assets)

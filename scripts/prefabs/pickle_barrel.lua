@@ -23,7 +23,7 @@ local function onhammered(inst, worker)
 	inst.SoundEmitter:PlaySound("dontstarve/common/destroy_wood")
 	inst:Remove()
 end
-	
+
 -- 	Define the positions of the slots
 local slotpos = {}
 for y = 2, 1, -1 do
@@ -57,18 +57,9 @@ end
 -- Randomizes the inspection line upon inspection, based on whether or not the pickle barrel is pickling.
 local function setdescription(isPickling)
 	if isPickling == true then
-		STRINGS.CHARACTERS.GENERIC.DESCRIBE.PICKLE_BARREL = {	
-			"It takes a while for things to pickle", 
-			"This pickling sure takes a while", 
-			"I'm stuck in a pickle until my food is done pickling",
-		}
+		STRINGS.CHARACTERS.GENERIC.DESCRIBE.PICKLE_BARREL = STRINGS.CHARACTERS.GENERIC.DESCRIBE.PICKLE_BARREL_PICKLING 
 	else
-		STRINGS.CHARACTERS.GENERIC.DESCRIBE.PICKLE_BARREL = {	
-			"Pickled foods last a long time, right?", 
-			"Mmm, salty goodness", 
-			"Not to be confused with pickleball",
-			"Serves sandwiches, right?",
-		}
+		STRINGS.CHARACTERS.GENERIC.DESCRIBE.PICKLE_BARREL = STRINGS.CHARACTERS.GENERIC.DESCRIBE.PICKLE_BARREL_GENERIC
 	end
 end
 
@@ -84,12 +75,17 @@ local function onclose(inst)
 	inst.AnimState:PlayAnimation("closed")
 end
 
+local function onbuilt(inst)
+	inst.AnimState:PlayAnimation("place")
+	inst.AnimState:PushAnimation("closed", false)
+end
+
 local function startpicklefn(inst)
 	-- Change the pickle barrel descriptions to descriptions that indicate the barrel is currently pickling
 	setdescription(true)
 	
 	-- Slow down the time it takes the food to perish
-	inst:AddTag("fridge")
+	inst.components.pickler:SlowPerishing()
 	
 	inst.SoundEmitter:PlaySound("pickle_barrel/pickle_barrel/pickling", "pickling")
 	
@@ -99,11 +95,8 @@ end
 local function donepicklefn(inst)
 	-- Change the pickle barrel descriptions back to default
 	setdescription(false)
-	
-	-- Return the time it takes the food to perish to normal
-	inst:RemoveTag("fridge")
 
-	inst.SoundEmitter:KillSound("pickling")
+	--inst.SoundEmitter:KillSound("pickling")
 	
 	inst.AnimState:PlayAnimation("closed")
 end
@@ -111,9 +104,6 @@ end
 local function continuedonefn(inst)
 	-- Change the pickle barrel descriptions back to default
 	setdescription(false)
-	
-	-- Return the time it takes the food to perish to normal
-	inst:RemoveTag("fridge")
 	
 	inst.AnimState:PlayAnimation("closed")
 end
@@ -123,7 +113,7 @@ local function continuepicklefn(inst)
 	setdescription(true)
 	
 	-- Slow down the time it takes the food to perish
-	inst:AddTag("fridge")
+	inst.components.pickler:SlowPerishing()
 	
 	inst.AnimState:PlayAnimation("full")
 end
@@ -158,7 +148,6 @@ local function fn(Sim)
     inst.AnimState:SetBuild("pickle_barrel")
     inst.AnimState:PlayAnimation("closed")
 
-	
     inst:AddComponent("pickler")
     inst.components.pickler.onstartpickling = startpicklefn
     inst.components.pickler.oncontinuepickling = continuepicklefn
@@ -201,13 +190,14 @@ local function fn(Sim)
     return inst
 end
 
-STRINGS.NAMES.PICKLE_BARREL = "Pickle Barrel"
-
 -- Set the pickle barrel description to default values (description changes when pickling)
-setdescription(false)
+--setdescription(false)
 
 -- Add recipe for pickle barrel
 local crafting_recipe = Recipe("pickle_barrel", {Ingredient("boards", 3), Ingredient("rope", 2)}, RECIPETABS.FARM,  TECH.SCIENCE_ONE, "pickle_barrel_placer")
+-- Removing sort key because recipe constructor auto-increments; using mod priority instead to ensure unique priority order
+-- http://forums.kleientertainment.com/topic/51231-general-mod-recipe-prioritysortkey-issue
+--crafting_recipe.sortkey = 3266001	--404983266001
 crafting_recipe.atlas = "images/inventoryimages/pickle_barrel.xml"
 
 
