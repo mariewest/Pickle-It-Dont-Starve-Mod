@@ -25,7 +25,12 @@ require "pickleit_strings"
 AddMinimapAtlas("images/inventoryimages/pickle_barrel.xml")
 
 -- Add the pickleit action (Controller support!)
-pickleit_dopickle = function(act)
+local Action = GLOBAL.Action
+local ActionHandler = GLOBAL.ActionHandler
+local Pickleit = Action()
+Pickleit.str = "Pickle"
+Pickleit.id = "PICKLEIT"
+Pickleit.fn = function(act)
 	if act.target.components.pickler ~= nil then
        if act.target.components.container ~= nil and act.target.components.container:IsOpen() and not act.target.components.container:IsOpenedBy(act.doer) then
            return false, "INUSE"
@@ -41,10 +46,8 @@ pickleit_dopickle = function(act)
 
 	return false
 end 
-
---AddAction('PICKLEIT', GLOBAL.STRINGS.NAMES.PICKLE, pickleit_dopickle)
---AddStategraphActionHandler('wilson_client', GLOBAL.ActionHandler(GLOBAL.ACTIONS.PICKLEIT, "dolongaction"))
---AddStategraphActionHandler('wilson', GLOBAL.ActionHandler(GLOBAL.ACTIONS.PICKLEIT, "dolongaction"))
+AddAction(Pickleit)
+AddStategraphActionHandler('wilson', ActionHandler(Pickleit, "dolongaction"))
 
 local function picklit_pickle_button(inst, doer, actions, right)
 	if right then
