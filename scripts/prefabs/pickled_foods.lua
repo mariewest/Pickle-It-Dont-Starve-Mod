@@ -31,6 +31,8 @@ PICKLED_FOODS =
 	mushroom = MakePickledFoodStats(	TUNING.CALORIES_SMALL, 		TUNING.HEALING_SMALL, 		TUNING.PERISH_PRESERVED, 	-TUNING.SANITY_SUPERTINY,	"VEGGIE", 	TUNING.STACK_SIZE_SMALLITEM, 	"red_cap"),
 	pumpkin = MakePickledFoodStats(		TUNING.CALORIES_MED, 		TUNING.HEALING_SMALL, 		TUNING.PERISH_PRESERVED, 	TUNING.SANITY_SUPERTINY,	"VEGGIE", 	TUNING.STACK_SIZE_SMALLITEM),
 	eggplant = MakePickledFoodStats(	TUNING.CALORIES_SMALL, 		TUNING.HEALING_SMALL, 		TUNING.PERISH_PRESERVED, 	0,							"VEGGIE", 	TUNING.STACK_SIZE_SMALLITEM),
+	berries = MakePickledFoodStats(		TUNING.CALORIES_SMALL, 	TUNING.HEALING_SMALL, 		TUNING.PERISH_PRESERVED, 	-TUNING.SANITY_SUPERTINY,	"VEGGIE", 	TUNING.STACK_SIZE_SMALLITEM),
+	watermelon = MakePickledFoodStats(		TUNING.CALORIES_MED, 	TUNING.HEALING_SMALL, 		TUNING.PERISH_PRESERVED, 	-TUNING.SANITY_TINY,	"VEGGIE", 	TUNING.STACK_SIZE_SMALLITEM),
 
 	egg = MakePickledFoodStats(			TUNING.CALORIES_SMALL, 		TUNING.HEALING_SMALL, 		TUNING.PERISH_SUPERSLOW, 	TUNING.SANITY_TINY,			"VEGGIE", 	TUNING.STACK_SIZE_SMALLITEM, 	"bird_egg"),
 	fish = MakePickledFoodStats(		TUNING.CALORIES_MED, 		TUNING.HEALING_MEDLARGE, 	TUNING.PERISH_PRESERVED, 	-TUNING.SANITY_SMALL,		"VEGGIE", 	TUNING.STACK_SIZE_SMALLITEM),
@@ -41,7 +43,7 @@ PICKLED_FOODS =
 }
 
 -- Make pickled food usable in the crock pot
-local veggies = {"beet_pickled", "cabbage_pickled", "cucumber_pickled", "onion_pickled", "radish_pickled", "carrot_pickled", "corn_pickled", "mushroom_pickled", "pumpkin_pickled", "eggplant_pickled"}
+local veggies = {"beet_pickled", "cabbage_pickled", "cucumber_pickled", "onion_pickled", "radish_pickled", "carrot_pickled", "corn_pickled", "mushroom_pickled", "pumpkin_pickled", "eggplant_pickled", "berries_pickled", "watermelon_pickled"}
 AddIngredientValues(veggies, {veggie=0.5}, true)
 
 local meats = {"pigs_foot_pickled"}
