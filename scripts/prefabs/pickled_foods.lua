@@ -43,8 +43,17 @@ PICKLED_FOODS =
 }
 
 -- Make pickled food usable in the crock pot
-local veggies = {"beet_pickled", "cabbage_pickled", "cucumber_pickled", "onion_pickled", "radish_pickled", "carrot_pickled", "corn_pickled", "mushroom_pickled", "pumpkin_pickled", "eggplant_pickled", "berries_pickled", "watermelon_pickled"}
+local veggies = {"beet_pickled", "cabbage_pickled", "cucumber_pickled", "onion_pickled", "radish_pickled", "carrot_pickled", "corn_pickled", "mushroom_pickled", "pumpkin_pickled", "eggplant_pickled"}
 AddIngredientValues(veggies, {veggie=0.5}, true)
+
+local veggies_big = {"cucumber_golden_pickled"}
+AddIngredientValues(veggies_big, {veggie=1}, true)
+
+local fruit = {"berries_pickled"}
+AddIngredientValues(fruit, {fruit=0.5}, true)
+
+local fruit_big = {"watermelon_pickled"}
+AddIngredientValues(fruit_big, {fruit=1}, true)
 
 local meats = {"pigs_foot_pickled"}
 AddIngredientValues(meats, {meat=0.5}, true)
@@ -52,8 +61,6 @@ AddIngredientValues(meats, {meat=0.5}, true)
 AddIngredientValues({"egg_pickled"}, {egg=1}, true)
 
 AddIngredientValues({"fish_pickled"}, {meat=.5,fish=1}, true)
-
-AddIngredientValues({"cucumber_golden_pickled"}, {veggie=1}, true)
 
 
 local function MakePickledFood(name)
