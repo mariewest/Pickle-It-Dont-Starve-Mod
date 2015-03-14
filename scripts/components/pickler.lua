@@ -10,6 +10,15 @@ local Pickler = Class(function(self, inst)
     self.pickle_time = TUNING.TOTAL_DAY_TIME * 2
 end)
 
+-- For Controller Support controller support
+function Pickler:CollectSceneActions(doer, actions, right)
+	if right and self:CanPickle() then
+   		table.insert(actions, ACTIONS.PICKLEIT)
+   	end
+end
+
+
+
 function Pickler:CanPickle()
 	local num = 0
 	for k,v in pairs (self.inst.components.container.slots) do

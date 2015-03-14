@@ -32,13 +32,10 @@ Pickleit.str = "Pickle"
 Pickleit.id = "PICKLEIT"
 Pickleit.fn = function(act)
 	if act.target.components.pickler ~= nil then
-       if act.target.components.container ~= nil and act.target.components.container:IsOpen() and not act.target.components.container:IsOpenedBy(act.doer) then
-           return false, "INUSE"
-       elseif not act.target.components.pickler:CanPickle() then
+       if not act.target.components.pickler:CanPickle() then
            return false
        end
 
-       act.target.components.pickler:SetPicklePerson(act.doer)
        act.target.components.pickler:StartPickling()
 
        return true
@@ -49,13 +46,7 @@ end
 AddAction(Pickleit)
 AddStategraphActionHandler('wilson', ActionHandler(Pickleit, "dolongaction"))
 
-local function picklit_pickle_button(inst, doer, actions, right)
-	if right then
-		table.insert(actions, GLOBAL.ACTIONS.PICKLEIT)
-	end
-end
---AddComponentAction('SCENE', 'pickler', picklit_pickle_button)
-
+-- Make pig foot loot stuffs
 local function AddPigLootInternal(prefab)
 	prefab.components.lootdropper:AddChanceLoot('pigs_foot',1)
 	prefab.components.lootdropper:AddChanceLoot('pigs_foot',.5)
