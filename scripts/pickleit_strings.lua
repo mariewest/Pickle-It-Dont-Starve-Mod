@@ -61,6 +61,15 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.BEET_PLANTED = {
 	"Looks like a beet",
 }
 
+-- Berries
+
+STRINGS.NAMES.BERRIES_PICKLED = "Pickled Berries"
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.BERRIES_PICKLED = {
+	"Pickled berries with just a touch of spice",
+	"This would be great with cheese",
+}
+
 -- Cabbage
 
 STRINGS.NAMES.CABBAGE = "Cabbage"
@@ -214,27 +223,48 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.ONION_PLANTED = {
 	"Look, a wild onion!",
 }
 
+-- Potato
+
+STRINGS.NAMES.POTATO = "Potato"
+STRINGS.NAMES.POTATO_COOKED = "Skillet Potatoes"
+STRINGS.NAMES.POTATO_PLANTED = "Potato"
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.POTATO = {	
+	"Boil 'em, mash 'em, stick 'em in a stew",
+	"I think, therefore I yam",
+	"Taters gonna tate",
+	"What's taters, precious?",
+	"What has eyes but can't see?\nPotatoes!",
+}
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.POTATO_COOKED = {	
+	"Simple, quick, and delicious potatoes", 
+	"Flavorful fried potatoes", 
+}
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.POTATO_PLANTED = {	
+	"If I want that potato, I'll need a shovel",
+}
+
 -- Pigs Foot
 
 STRINGS.NAMES.PIGS_FOOT = "Pigs Foot"
+STRINGS.NAMES.PIGS_FOOT_COOKED = "Pork Rinds"
+STRINGS.NAMES.PIGS_FOOT_PICKLED = "Pickled Pigs Foot"
+STRINGS.NAMES.PIGS_FOOT_DRIED = "Dried Pigs Foot"
 
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGS_FOOT = {	
 	"Poor Wilbur...",
 	"This little piggy isn't going to the market anymore",
 }
-
-STRINGS.NAMES.PIGS_FOOT_COOKED = "Pork Rinds"
-
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGS_FOOT_COOKED = {	
 	"Best eaten while watching football",
 	"A crunchy snack made from meat!",
 }
-
-STRINGS.NAMES.PIGS_FOOT_PICKLED = "Pickled Pigs Foot"
-
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGS_FOOT_PICKLED = {	
 	"Who thought this was a good idea?",
 	"I don't think a starving raptor would even eat this",
+}
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.PIGS_FOOT_DRIED = {	
+	"Delicious pig foot jerky...",
 }
 
 -- Pumpkin
@@ -272,4 +302,13 @@ STRINGS.CHARACTERS.GENERIC.DESCRIBE.RADISH_PICKLED = {
 }
 STRINGS.CHARACTERS.GENERIC.DESCRIBE.RADISH_PLANTED = {	
 	"It's a little wild radish",
+}
+
+-- Watermelon
+
+STRINGS.NAMES.WATERMELON_PICKLED = "Pickled Watermelon Rind"
+
+STRINGS.CHARACTERS.GENERIC.DESCRIBE.WATERMELON_PICKLED = {
+	"Who thought to pickle watermelon rind?",
+	"This would be good with cheese and crackers",
 }
