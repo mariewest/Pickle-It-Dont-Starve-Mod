@@ -6,7 +6,7 @@ local Pickler = Class(function(self, inst)
     self.targettime = nil
     self.task = nil
 
-	-- Pickling should take 2 days to complete
+	-- Pickling should take 1.5 days to complete
     self.pickle_time = TUNING.TOTAL_DAY_TIME * 1.5
 end)
 

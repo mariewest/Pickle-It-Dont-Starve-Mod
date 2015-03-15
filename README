@@ -20,11 +20,17 @@ Pickle Barrel Pickling Sound:
 
 Update History:
 
+2015-03-14 [Version 1.3.0] - Port from DST version
+ - Ported from DST version (various fixes, Xbox controller support, pickle sword, golden pickle)
+ - Added pickled berries & pickled watermelon rind
+ - Reduced pickling time to 1.5 days
+
+
 2014-07-05 - Tweaked stats
-- Updated API version #
-- Modified pickle barrel crafting components (removed wet goop and gold; added rope)
-- Adjusted pickled food stat values
-- Reduced pickling time from 3 days to 2 days
+ - Updated API version #
+ - Modified pickle barrel crafting components (removed wet goop and gold; added rope)
+ - Adjusted pickled food stat values
+ - Reduced pickling time from 3 days to 2 days
 
 
 2014-03-09 - New mod API version & minor fixes
