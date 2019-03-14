@@ -28,7 +28,7 @@ AddMinimapAtlas("images/inventoryimages/pickle_barrel.xml")
 -- Add the pickleit action (Controller support!)
 local Action = GLOBAL.Action
 local ActionHandler = GLOBAL.ActionHandler
-local Pickleit = Action()
+local Pickleit = Action({mount_enabled=false})
 Pickleit.str = "Pickle"
 Pickleit.id = "PICKLEIT"
 Pickleit.fn = function(act)
